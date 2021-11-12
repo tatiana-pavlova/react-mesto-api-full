@@ -1,0 +1,38 @@
+{
+  "name": "express-mesto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "lint:fix": "eslint --fix --ext .js,.jsx .",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tatiana-pavlova/express-mesto.git"
+  },
+  "author": "Tatiana Pavlova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tatiana-pavlova/express-mesto/issues"
+  },
+  "homepage": "https://github.com/tatiana-pavlova/express-mesto#readme",
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^15.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-winston": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.11",
+    "winston": "^3.3.3"
+  }
+}

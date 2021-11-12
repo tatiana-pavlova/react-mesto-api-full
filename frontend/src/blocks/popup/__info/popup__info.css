@@ -1,0 +1,8 @@
+.popup__info {
+  min-height: 210px;
+  margin: 26px 0 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

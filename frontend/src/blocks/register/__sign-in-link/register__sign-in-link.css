@@ -1,0 +1,9 @@
+.register__sign-in-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.register__sign-in-link:hover {
+  opacity: .6;
+}

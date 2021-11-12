@@ -1,0 +1,16 @@
+.place__delete_visible {
+  width: 18px;
+  height: 19.3px;
+  background-image: url(../../../../images/delete_ico.svg);
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+
+.place__delete_visible:hover {
+  opacity: .6;
+}
