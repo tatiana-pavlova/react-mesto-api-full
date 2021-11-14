@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
-const cors = require('cors');
+// const cors = require('cors');
 const routerUser = require('./routes/users');
 const routerCard = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
@@ -14,40 +14,40 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 const app = express();
 
-// const allowedCors = [
-//   'http://api.mesto.tatianapavlova.nomoredomains.rocks',
-//   'https://api.mesto.tatianapavlova.nomoredomains.rocks',
-//   'http://mesto.tatianapavlova.nomoredomains.rocks',
-//   'https://mesto.tatianapavlova.nomoredomains.rocks',
-//   'localhost:3000',
-// ];
+const allowedCors = [
+  'http://api.mesto.tatianapavlova.nomoredomains.rocks',
+  'https://api.mesto.tatianapavlova.nomoredomains.rocks',
+  'http://mesto.tatianapavlova.nomoredomains.rocks',
+  'https://mesto.tatianapavlova.nomoredomains.rocks',
+  'localhost:3000',
+];
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   autoIndex: true,
 });
 
-app.use(cors());
+// app.use(cors());
 
-// app.use((req, res, next) => {
-//   const { origin } = req.headers;
-//   console.log(origin); // удалить
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', origin);
-//   }
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  // console.log(origin); // удалить
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
 
-//   const { method } = req.method;
-//   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-//   const requestHeaders = req.headers['Access-Control-Request-Headers'];
+  const { method } = req;
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  const requestHeaders = req.headers['access-control-request-headers'];
 
-//   if (method === 'OPTIONS') {
-//     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-//     res.header('Access-Control-Allow-Headers', requestHeaders);
-//     return res.end();
-//   }
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
+  }
 
-//   return next();
-// });
+  return next();
+});
 
 app.use(express.json());
 
