@@ -1,7 +1,7 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
 
-// export const BASE_URL = "http://mesto.tatianapavlova.nomoredomains.rocks";
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://mesto.tatianapavlova.nomoredomains.rocks";
+// export const BASE_URL = "http://localhost:3000";
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
