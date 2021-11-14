@@ -215,16 +215,16 @@ function App() {
               <ProtectedRoute exact path="/" loggedIn={loggedIn} component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} 
                       onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
               
-              <Route path='/sign-up'>
+              <Route path='/signup'>
                 <Register onRegister={onRegister} />
               </Route>
 
-              <Route path='/sign-in'>
+              <Route path='/signin'>
                 <Login onLogin={onLogin} />
               </Route>
 
               <Route >
-                {loggedIn? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+                {loggedIn? <Redirect to="/" /> : <Redirect to="/signin" />}
               </Route>
             </Switch>
             <Footer />
