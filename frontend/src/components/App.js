@@ -102,7 +102,7 @@ function App() {
     return auth.register(password, email).then ((res) => {
       if (res) {
         handleInfoTooltipSuccess();
-        history.push('/sign-in');
+        history.push('/signin');
       } 
     })
     .catch (() => {
@@ -122,7 +122,7 @@ function App() {
   const onSignOut = () => {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
-    history.push('/sign-in');
+    history.push('/signin');
   }
 
   function handleLogin() {

@@ -50,7 +50,15 @@ module.exports.createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
 
-  bcrypt.hash(password, 10)
+  console.log(req.body); // позже удалить!
+  User.findOne({ email })
+    .then((user) => {
+      if (user) {
+        throw new ConflictError('Данный email уже зарегистрирован');
+      } else {
+        return bcrypt.hash(password, 10);
+      }
+    })
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     }))
@@ -59,11 +67,26 @@ module.exports.createUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Переданы некорректные данные');
       }
-      if (err.name === 'MongoError' && err.code === 11000) {
-        throw new ConflictError('Данный email уже зарегистрирован');
-      }
+      // if (err.name === 'MongoError' && err.code === 11000) {
+      //   throw new ConflictError('Данный email уже зарегистрирован');
+      // }
     })
     .catch(next);
+
+  // bcrypt.hash(password, 10)
+  //   .then((hash) => User.create({
+  //     name, about, avatar, email, password: hash,
+  //   }))
+  //   .then((user) => res.status(200).send(user))
+  //   .catch((err) => {
+  //     if (err.name === 'ValidationError') {
+  //       throw new BadRequestError('Переданы некорректные данные');
+  //     }
+  //     if (err.name === 'MongoError' && err.code === 11000) {
+  //       throw new ConflictError('Данный email уже зарегистрирован');
+  //     }
+  //   })
+  //   .catch(next);
 };
 
 module.exports.updateUser = (req, res, next) => {
