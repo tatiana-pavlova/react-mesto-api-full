@@ -98,7 +98,7 @@ class Api {
 //             'Content-Type': 'application/json'}
 // });
 
-const api = new Api({url: 'https://mesto.tatianapavlova.nomoredomains.rocks/', 
+const api = new Api({url: 'https://mesto.tatianapavlova.nomoredomains.rocks', 
   headers: {'Content-Type': 'application/json'}
 });
 
