@@ -7,7 +7,8 @@ class Api {
 
   getUserInfo () {
     return fetch (`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     })
       .then ((res) => {
         return this._checkResponse(res)
@@ -17,7 +18,8 @@ class Api {
 
   getInitialCards () {
     return fetch (`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     })
       .then ((res) => {
         return this._checkResponse(res)
@@ -28,6 +30,7 @@ class Api {
     return fetch (`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -42,6 +45,7 @@ class Api {
     return fetch (`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: avatarUrl
       })
@@ -55,6 +59,7 @@ class Api {
     return fetch (`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: card.name,
         link: card.link
@@ -69,6 +74,7 @@ class Api {
     return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: this._headers,
+      credentials: 'include'
     })
       .then ((res) => {
         return this._checkResponse(res)
@@ -79,6 +85,7 @@ class Api {
     return fetch (`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
+      credentials: 'include'
     })
       .then ((res) => {
         return this._checkResponse(res)
@@ -98,12 +105,12 @@ class Api {
 //             'Content-Type': 'application/json'}
 // });
 
-// const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
-//   headers: {'Content-Type': 'application/json'}
-// });
-
-const api = new Api({url: 'http://localhost:3001/', 
+const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
   headers: {'Content-Type': 'application/json'}
 });
+
+// const api = new Api({url: 'http://localhost:4000', 
+//   headers: {'Content-Type': 'application/json'}
+// });
 
 export default api;

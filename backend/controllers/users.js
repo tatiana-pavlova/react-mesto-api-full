@@ -33,7 +33,7 @@ module.exports.getUser = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getCurrentUser = (req, res, next) => {
+module.exports.getCurrentUser = async (req, res, next) => {
   const id = req.user._id;
   return User.findById(id)
     .then((user) => {
@@ -132,11 +132,14 @@ module.exports.login = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      // res.cookie('jwt', token, {
-      //   maxAge: 3600000,
-      //   httpOnly: true,
-      // })
-      res.send({ message: 'Успешный логин', token });
+      res
+        .cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: true,
+          secure: false,
+        })
+        .send({ message: 'Успешный логин', token });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

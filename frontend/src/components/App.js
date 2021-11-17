@@ -84,18 +84,24 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    let isApiSubscribed = true;
+    // const jwt = localStorage.getItem('jwt');
     
-    if(jwt) {
-      auth.getContent(jwt).then((res) => {
-        if(res) {
-          setEmail(res.data.email);
-          setLoggedIn(true);
-          history.push('/');
+    // if(jwt) {
+      auth.getContent().then((res) => {
+        if (isApiSubscribed) {
+          if(res) {
+            setEmail(res.email);
+            setLoggedIn(true);
+            history.push('/');
+          }
         }
       })
       .catch(err => console.log(err));
-    }
+      return () => {
+        isApiSubscribed = false;
+      }
+    // }
   },[history])
 
   const onRegister = ({password, email}) => {

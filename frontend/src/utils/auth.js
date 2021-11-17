@@ -1,7 +1,7 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
 
-// export const BASE_URL = "https://api.mesto.tatianapavlova.nomoredomains.rocks";
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "https://api.mesto.tatianapavlova.nomoredomains.rocks";
+// export const BASE_URL = "http://localhost:4000";
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -9,6 +9,7 @@ export const register = (password, email) => {
     headers: {
       'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify({password, email})
   })
     .then((res) => _checkResponse(res))
@@ -20,6 +21,7 @@ export const authorize = (password, email) => {
     headers: {
       'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify({password, email})
   })
     .then((res) => _checkResponse(res))
@@ -33,13 +35,14 @@ export const authorize = (password, email) => {
     })
 }
 
-export const getContent = (token) => {
+export const getContent = () => {  //токен в аргументе
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
+      // 'Authorization': `Bearer ${token}`,
+    },
+    credentials: 'include'
   })
   .then((res) => _checkResponse(res))
   .then(data => data)
