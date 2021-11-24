@@ -113,7 +113,7 @@ module.exports.login = (req, res, next) => {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
-          secure: false,
+          secure: true,
         })
         .send({ message: 'Успешный логин', token });
     })
