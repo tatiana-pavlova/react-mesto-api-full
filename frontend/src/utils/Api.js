@@ -105,12 +105,12 @@ class Api {
 //             'Content-Type': 'application/json'}
 // });
 
-// const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
-//   headers: {'Content-Type': 'application/json'}
-// });
-
-const api = new Api({url: 'http://localhost:4000', 
+const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
   headers: {'Content-Type': 'application/json'}
 });
+
+// const api = new Api({url: 'http://localhost:4000', 
+//   headers: {'Content-Type': 'application/json'}
+// });
 
 export default api;
