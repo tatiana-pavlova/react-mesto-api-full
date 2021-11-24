@@ -1,7 +1,7 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
 
-export const BASE_URL = "https://api.mesto.tatianapavlova.nomoredomains.rocks";
-// export const BASE_URL = "http://localhost:4000";
+// export const BASE_URL = "https://api.mesto.tatianapavlova.nomoredomains.rocks";
+export const BASE_URL = "http://localhost:4000";
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -25,22 +25,24 @@ export const authorize = (password, email) => {
     body: JSON.stringify({password, email})
   })
     .then((res) => _checkResponse(res))
-    .then ((data) => {
-      if (data.token) {
-        localStorage.setItem ('jwt', data.token);
-        return data;
-      } else {
-        return;
-      }
-    })
 }
 
-export const getContent = () => {  //токен в аргументе
+export const unauthorize = () => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+  })
+    .catch(err => console.log(err));
+}
+
+export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${token}`,
     },
     credentials: 'include'
   })

@@ -71,7 +71,7 @@ class Api {
   }
 
   changeLikeCardStatus (cardId, isLiked) {
-    return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch (`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: this._headers,
       credentials: 'include'
@@ -105,12 +105,12 @@ class Api {
 //             'Content-Type': 'application/json'}
 // });
 
-const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
-  headers: {'Content-Type': 'application/json'}
-});
-
-// const api = new Api({url: 'http://localhost:4000', 
+// const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
 //   headers: {'Content-Type': 'application/json'}
 // });
+
+const api = new Api({url: 'http://localhost:4000', 
+  headers: {'Content-Type': 'application/json'}
+});
 
 export default api;

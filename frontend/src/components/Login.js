@@ -4,11 +4,6 @@ function Login ({onLogin}) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   
-  const resetForm = () => {
-    setEmail('');
-    setPassword('');
-  }
-
   function handleChangeEmail (e) {
     setEmail(e.target.value);
   }
@@ -24,7 +19,6 @@ function Login ({onLogin}) {
     }
 
     onLogin({password, email})
-      .then (() => resetForm())
       .catch((err) => console.log(err))
   }
 

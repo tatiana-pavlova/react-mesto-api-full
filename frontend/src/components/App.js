@@ -70,7 +70,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [])
+  }, [loggedIn])
 
 
   React.useEffect(() => {
@@ -80,29 +80,19 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
-  }, [])
+      })
+  }, [loggedIn])
 
   React.useEffect(() => {
-    let isApiSubscribed = true;
-    // const jwt = localStorage.getItem('jwt');
-    
-    // if(jwt) {
-      auth.getContent().then((res) => {
-        if (isApiSubscribed) {
-          if(res) {
-            setEmail(res.email);
-            setLoggedIn(true);
-            history.push('/');
-          }
-        }
-      })
-      .catch(err => console.log(err));
-      return () => {
-        isApiSubscribed = false;
+    auth.getContent().then((res) => {
+      if(res) {
+        setEmail(res.email);
+        setLoggedIn(true);
+        history.push('/');
       }
-    // }
-  },[history])
+    })
+      .catch(err => console.log(err));
+  },[history, loggedIn])
 
   const onRegister = ({password, email}) => {
     return auth.register(password, email).then ((res) => {
@@ -119,24 +109,20 @@ function App() {
   const onLogin = ({password, email}) => {
     return auth.authorize(password, email).then ((data) => {
       if (data.token) {
-        handleLogin();
+        setLoggedIn(true);
         history.push('/');
       }
     })
   }
 
   const onSignOut = () => {
-    localStorage.removeItem('jwt');
+    auth.unauthorize();
     setLoggedIn(false);
     history.push('/signin');
   }
 
-  function handleLogin() {
-    setLoggedIn(true);
-  }
-
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -202,7 +188,7 @@ function App() {
   function handleAddPlaceSubmit(card) {
     api.loadNewCard(card)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([...cards, newCard]);
         closeAllPopups();
       })
       .catch((err) => {

@@ -15,10 +15,10 @@ module.exports.getCards = (req, res, next) => Card.find({})
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;
-
   return Card.create({ name, link, owner })
     .then((card) => res.status(200).send(card))
     .catch((err) => {
+      res.send(err);
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Переданы некорректные данные');
       }
@@ -28,18 +28,18 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   const id = req.params.cardId;
-  return Card.findById(id)
-    .then((card) => {
-      if (card.owner !== req.user._id) {
-        throw new ConflictError('Попытка удалить чужую карточку');
-      }
-      Card.findOneAndDelete({ owner: req.user });
-    })
+  Card.findById(id)
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      return res.status(200).send(card);
+      if (card.owner._id.toString() !== req.user._id) {
+        throw new ConflictError('Попытка удалить чужую карточку');
+      }
+      Card.findByIdAndRemove(id)
+        .then((delCard) => {
+          res.status(200).send(delCard);
+        });
     })
     .catch(next);
 };

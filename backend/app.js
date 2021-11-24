@@ -1,5 +1,4 @@
 require('dotenv').config();
-// const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
@@ -12,7 +11,7 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 const app = express();
 app.use(cookiePerser());
 
@@ -29,8 +28,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   autoIndex: true,
 });
-
-// app.use(cors());
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
@@ -69,6 +66,11 @@ app.post('/signup', celebrate({
   }).unknown(true),
 }), createUser);
 
+app.get('/signin', (req, res, next) => {
+  res.clearCookie('jwt').send('jwt удален');
+  next();
+});
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -97,8 +99,6 @@ app.use((err, req, res, next) => {
   });
   next();
 });
-
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
   console.log('Express is running');
