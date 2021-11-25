@@ -100,17 +100,8 @@ class Api {
   }
 }
 
-// const api = new Api({url: 'https://nomoreparties.co/v1/cohort-26', 
-//   headers: {authorization: 'adc76ba5-f155-4ece-b7e2-4db6eaf8ed57',
-//             'Content-Type': 'application/json'}
-// });
-
 const api = new Api({url: 'https://api.mesto.tatianapavlova.nomoredomains.rocks', 
   headers: {'Content-Type': 'application/json'}
 });
-
-// const api = new Api({url: 'http://localhost:4000', 
-//   headers: {'Content-Type': 'application/json'}
-// });
 
 export default api;
