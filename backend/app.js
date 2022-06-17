@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 const cookiePerser = require('cookie-parser');
-// const cors = require('cors');
 const routerUser = require('./routes/users');
 const routerCard = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
@@ -11,17 +10,12 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 const app = express();
 app.use(cookiePerser());
 
 const allowedCors = [
-  'http://api.mesto.tatianapavlova.nomoredomains.rocks',
-  'https://api.mesto.tatianapavlova.nomoredomains.rocks',
-  'http://mesto.tatianapavlova.nomoredomains.rocks',
-  'https://mesto.tatianapavlova.nomoredomains.rocks',
   'http://localhost:3000',
-  'http://localhost:4000',
 ];
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
