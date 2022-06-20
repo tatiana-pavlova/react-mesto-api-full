@@ -1,7 +1,5 @@
 # Учебный проект "Mesto"
 
-![Скриншот приложения](https://drive.google.com/file/d/1Yr4HBhO3Sjc654ERCwzea9CGUjTc2hIK/view?usp=sharing)
-
 Репозиторий включает фронтенд и бэкенд части приложения. 
 
 ## Директория `frontend/`
