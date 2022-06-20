@@ -1,5 +1,7 @@
 # Учебный проект "Mesto"
 
+![Скриншот приложения](https://drive.google.com/file/d/1Yr4HBhO3Sjc654ERCwzea9CGUjTc2hIK/view?usp=sharing)
+
 Репозиторий включает фронтенд и бэкенд части приложения. 
 
 ## Директория `frontend/`
@@ -16,10 +18,6 @@
 * grid layout
 * методология БЭМ
 
-### Запуск проекта
-
-`npm run build` — запускает приложение   
-`npm run start` — запускает приложение с hot-reload
 
 ## Директория `backend/`
 
@@ -30,7 +28,38 @@
 * Express.js
 * MongoDB
 
-### Запуск проекта
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+## Запуск проекта
+
+1. Установить [Node.js](https://nodejs.org/en/download/)
+2. Установить [Git](https://git-scm.com/downloads)
+3. Клонировать репозиторий с помощью командной строки
+   ```
+   git clone git@github.com:tatiana-pavlova/react-mesto-api-full.git
+   ```
+4. Перейти в директорию `backend`
+5. Установить все зависимости с помощью командной строки
+   ```
+   npm install
+   ```
+6. Запустить сервер с hot-reload с помощью командной строки
+   ```
+   npm run dev
+   ```
+   Или запустить сервер в режиме production
+   ```
+   npm run start
+   ```
+7. Перейти в директорию `frontend`
+8. Установить все зависимости с помощью командной строки
+   ```
+   npm install
+   ```
+9. Запустить приложение с hot-reload с помощью командной строки
+   ```
+   npm run start
+   ```
+   Или запустить приложение в режиме production
+   ```
+   npm run build
+   ```
