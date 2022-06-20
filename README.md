@@ -1,5 +1,7 @@
 # Учебный проект "Mesto"
 
+![Скриншот приложения](https://github.com/tatiana-pavlova/react-mesto-api-full/tree/main/frontend/src/images/screenshot.png)
+
 Репозиторий включает фронтенд и бэкенд части приложения. 
 
 ## Директория `frontend/`
